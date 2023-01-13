@@ -20,6 +20,7 @@ if ($rows) {
     } else {
         $q = "insert into groups (groupname) values ('$group')";
         mysqli_query($con, $q);
+        mysqli_query($con, "create table $group (`id` int auto_increment not null primary key, `domain` varchar(255) not null, `record_detail` varchar(255) not null, `record_type` int not null,`address` varchar(255) not null,`user` varchar(255))");
         echo "添加成功<br /><a href=\"index.html\">回到首页</a><br />";
     }
 

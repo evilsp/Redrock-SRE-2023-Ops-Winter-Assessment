@@ -23,7 +23,7 @@ if ($name && $password) { //如果用户名和密码都不为空
         }
         $_SESSION["isLogin"] = true;
         $_SESSION["username"] = $name;
-        $_SESSION["group"] = $res["group"];
+        $_SESSION["group"] = $res["groupname"];
         header("refresh:0;url=welcome.html"); //如果成功跳转至welcome.html页面
         exit;
     } else {

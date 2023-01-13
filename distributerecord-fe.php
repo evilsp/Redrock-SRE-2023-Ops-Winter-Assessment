@@ -7,7 +7,7 @@
 
 <body>
   <meta charset="UTF-8">
-  <h1>分发域名记录范围</h1>
+  <h1>为组分发域名记录范围</h1>
   <hr />
 
   <form action="distributerecord-be.php " method="post" enctype="multipart/form-data">

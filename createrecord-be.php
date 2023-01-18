@@ -34,6 +34,36 @@ while ($arr = $result->fetch_assoc()) {
         $rows = mysqli_num_rows($result); //返回一个数值
         if (!$rows) {
             mysqli_query($con, "insert into $group (domain,record_detail,record_type,address,user) values ('$domain','$record',$type,'$address','$user')");
+            $type_str = "";
+            switch ($type) {
+                case 1:
+                    $type_str = "A";
+                    break;
+                case 2:
+                    $type_str = "AAAA";
+                    break;
+                case 4:
+                    $type_str = "CNAME";
+                    break;
+                case 8:
+                    $type_str = "MX";
+                    break;
+                case 16:
+                    $type_str = "TXT";
+                    break;
+            }
+            $ch = curl_init();
+            $data = array(
+                'domain' => $domain,
+                'record' => $record,
+                'type' => $type_str,
+                'value' => $address,
+            );
+            curl_setopt($ch, CURLOPT_URL, "localhost:1432/createRecord");
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_exec($ch);
+            curl_close($ch);
             echo "创建成功<br /><a href=\"index.html\">回到首页</a><br />";
             exit();
         } else {

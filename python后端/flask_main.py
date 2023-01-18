@@ -14,6 +14,7 @@ def create():
     type = request.form["type"]
     value = request.form["value"]
     createRecord(domain,record,type,value)
+    return "调用API成功！<br>"
 
 @app.route('/deleteRecord',methods=["POST"])
 def delete():
@@ -21,6 +22,7 @@ def delete():
     record = request.form["record"]
     type = request.form["type"]
     deleteRecord(domain,record,type)
+    return "调用API成功！<br>"
 
 if __name__== "__main__":
     app.run(port=1432)

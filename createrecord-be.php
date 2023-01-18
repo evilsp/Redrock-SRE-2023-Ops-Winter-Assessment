@@ -59,7 +59,7 @@ while ($arr = $result->fetch_assoc()) {
                 'type' => $type_str,
                 'value' => $address,
             );
-            curl_setopt($ch, CURLOPT_URL, "localhost:1432/createRecord");
+            curl_setopt($ch, CURLOPT_URL, "http://localhost:1432/createRecord");
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_exec($ch);

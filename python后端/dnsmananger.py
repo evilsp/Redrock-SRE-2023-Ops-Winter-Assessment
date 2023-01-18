@@ -5,7 +5,6 @@ from datetime import datetime
 secret_id = os.environ.get("TENCENTCLOUD_SECRET_ID")
 secret_key = os.environ.get("TENCENTCLOUD_SECRET_KEY")
 
-
 def createRecord(domain, record, type, value, line="默认"):
     service = "dnspod"
     host = "dnspod.tencentcloudapi.com"
@@ -67,9 +66,10 @@ def createRecord(domain, record, type, value, line="默认"):
     #       + " -d '" + payload + "'")
     headers = {"Authorization": authorization, "Content-Type": "application/json; charset=utf-8", "Host": host,
                "X-TC-Action": action, "X-TC-Timestamp": str(timestamp), "X-TC-Version": version}
-    headers = json.dumps(headers)
 
-    requests.post(url=endpoint, json=payload, headers=headers)
+    req = requests.post(url=endpoint, data=payload, headers=headers).text
+    print(req)
+
 
 
 def queryRecord(domain, record, type):
@@ -132,9 +132,8 @@ def queryRecord(domain, record, type):
     #       + " -d '" + payload + "'")
     headers = {"Authorization": authorization, "Content-Type": "application/json; charset=utf-8", "Host": host,
                "X-TC-Action": action, "X-TC-Timestamp": str(timestamp), "X-TC-Version": version}
-    headers = json.dumps(headers)
 
-    return requests.post(url=endpoint, json=payload, headers=headers).json()
+    return requests.post(url=endpoint, data=payload, headers=headers).json()
 
 
 def deleteRecord(domain, record, type):
@@ -200,6 +199,6 @@ def deleteRecord(domain, record, type):
     #       + " -d '" + payload + "'")
     headers = {"Authorization": authorization, "Content-Type": "application/json; charset=utf-8", "Host": host,
                "X-TC-Action": action, "X-TC-Timestamp": str(timestamp), "X-TC-Version": version}
-    headers = json.dumps(headers)
 
-    requests.post(url=endpoint, json=payload, headers=headers)
+    req = requests.post(url=endpoint, data=payload, headers=headers).text
+    print(req)

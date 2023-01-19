@@ -16,13 +16,13 @@ if ($rows) {
     $rwos = mysqli_num_rows($reslut);
     if (!$rwos) {
         mysqli_query($con, "insert into domains (domain) values ('$domain')");
-        echo "添加成功！<br /><a href=\"index.html\">回到首页</a><br />";
+        echo "添加成功！<br /><a href=\"index-admin.html\">回到首页</a><br />";
     } else {
-        echo "添加失败！重复导入！<br /><a href=\"index.html\">回到首页</a><br />";
+        echo "添加失败！重复导入！<br /><a href=\"index-admin.html\">回到首页</a><br />";
 
     }
 
 
 } else {
-    echo "管理员密码错误！<br /><a href=\"index.html\">回到首页</a><br />";
+    echo "管理员密码错误！<br /><a href=\"index-admin.html\">回到首页</a><br />";
 }

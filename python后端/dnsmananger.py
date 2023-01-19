@@ -81,7 +81,7 @@ def queryRecord(domain, record, type):
     algorithm = "TC3-HMAC-SHA256"
     timestamp = int(time.time())
     date = datetime.utcfromtimestamp(timestamp).strftime("%Y-%m-%d")
-    params = {"Domain": f"{domain}", "SubDomain": f"{record}", "RecordType": f"{type}"}
+    params = {"Domain": f"{domain}", "Subdomain": f"{record}", "RecordType": f"{type}"}
 
     http_request_method = "POST"
     canonical_uri = "/"
@@ -132,8 +132,10 @@ def queryRecord(domain, record, type):
     #       + " -d '" + payload + "'")
     headers = {"Authorization": authorization, "Content-Type": "application/json; charset=utf-8", "Host": host,
                "X-TC-Action": action, "X-TC-Timestamp": str(timestamp), "X-TC-Version": version}
+    req = requests.post(url=endpoint, data=payload, headers=headers).json()
+    print(req)
 
-    return requests.post(url=endpoint, data=payload, headers=headers).json()
+    return req
 
 
 def deleteRecord(domain, record, type):

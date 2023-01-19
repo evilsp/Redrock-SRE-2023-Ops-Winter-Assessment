@@ -28,6 +28,6 @@ if ($pwd1 == $pwd2) {
     } else {
         $q = "insert into user(username,pwd_sha256,groupname,role) values ('$name','$pwd1','$group','mananger')";
         $reslut = mysqli_query($con, $q);
-        echo "注册成功    <br /><a href=\"index.html\">回到首页</a><br />";
+        echo "注册成功    <br /><a href=\"index-admin.html\">回到首页</a><br />";
     }
 }

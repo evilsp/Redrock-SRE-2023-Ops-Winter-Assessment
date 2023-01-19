@@ -25,5 +25,5 @@ if ($rows) {
     }
 
 } else {
-    echo "管理员密码错误！<br /><a href=\"index.html\">回到首页</a><br />";
+    echo "管理员密码错误！<br /><a href=\"index-admin.html\">回到首页</a><br />";
 }

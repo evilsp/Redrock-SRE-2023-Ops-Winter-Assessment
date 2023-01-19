@@ -8,6 +8,54 @@
 <body>
     <meta charset="UTF-8">
     <h1>为组员分发域名记录范围</h1>
+    <?php
+    session_start();
+    include('connect.php'); //链接数据库
+    $group = $_SESSION["group"];
+    $sql = "select * from root where groupname = '$group' and user is NULL";
+    $result = mysqli_query($con, $sql); //执行sql
+    echo "你的组当前拥有的域名范围：<br>";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $domain = $row["domain"];
+            $record = $row["record_detail"];
+            $type = $row["record_type"];
+            $typr_str = "";
+            $allow_range = decbin($type);
+            while (strlen($allow_range) < 5) {
+                $allow_range = "0" . $allow_range;
+            }
+            $allow_range = str_split($allow_range);
+            for ($i = 0; $i < 5; $i++) {
+                if ($allow_range[$i] == "1") {
+                    if ($i == 0) {
+                        $typr_str = $typr_str . " A ";
+                    }
+                    if ($i == 1) {
+                        $typr_str = $typr_str . " AAAA ";
+                    }
+                    if ($i == 2) {
+                        $typr_str = $typr_str . " CNAME ";
+                    }
+                    if ($i == 3) {
+                        $typr_str = $typr_str . " MX ";
+                    }
+                    if ($i == 4) {
+                        $typr_str = $typr_str . " TXT ";
+                    }
+                }
+            }
+            echo "<p>" . $record . "." . $domain . "      允许类型：";
+            echo $typr_str;
+            echo "</p>";
+        }
+
+
+
+    }
+
+
+    ?>
     <hr />
 
     <form action="distributerecord-mgr-be.php " method="post" enctype="multipart/form-data">

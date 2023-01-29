@@ -25,4 +25,4 @@ def delete():
     return "调用删除记录API成功！<br>"
 
 if __name__== "__main__":
-    app.run(port=1432)
+    app.run(host="0.0.0.0",port=1432)

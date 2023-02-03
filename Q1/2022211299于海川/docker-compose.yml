@@ -1,0 +1,12 @@
+version: "3" 
+services: 
+  dnsmananger: 
+    image: tritium0041/dnsmananger:latest
+    ports: 
+      - "9090:80"
+  pybe: 
+    image: tritium0041/pybe:latest
+    environment: 
+      TENCENTCLOUD_SECRET_ID: #填写密钥ID
+      TENCENTCLOUD_SECRET_KEY: #填写密钥key
+    hostname: pybe

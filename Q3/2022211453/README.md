@@ -14,6 +14,8 @@
 
 ![img](https://raw.githubusercontent.com/lanziking01/555/main/img/image-20230131024307648.png)
 
+![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/dc7b945c990ac6e52e8c653efaf56d0.png)
+
 2.若receivers_emails.txt里的收件人邮箱格式不对，报错。
 
 ![](https://raw.githubusercontent.com/lanziking01/555/main/img/34d892a9bd5f87e73e8553d475b9693.png)

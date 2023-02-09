@@ -1,34 +1,46 @@
 import os
-import re
-import sys
-import zipfile
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.application import MIMEApplication
+import re
+import zipfile
+import sys
+import time
+import shutil
 
-# 获取发件人邮箱和授权码
+# 获取发送的邮箱和密码
 def get_email():
+    # 选取要使用的发送邮箱
+    senmail_list = open('email.txt')
     try:
-      with open('./file/sender_emails.txt') as f:
-        info = f.readlines()
-        for email in info:
-            txt = email.replace('\n', '')
-            sendemail = txt.split()[0]
-            password = txt.split()[1]
+        with open('./file/sender_emails.txt') as f:
+            info = f.readlines()
+            for email in info:
+                txt = email.replace('\n', '')
+                sendemail = txt.split()[0]
+                password = txt.split()[1]
+                if sendemail not in senmail_list:
+                    print('没有登记该邮箱')
+                else:
+                    return sendemail, password
     except:
         print('请检查sender_emails.txt文件是否存在!')
-    return sendemail, password
-# 解压
+
+
+# 解压文件
 def extract_file(zip_path):
-        zip_file = zipfile.ZipFile(zip_path, "r")
+    with zipfile.ZipFile(zip_path, "r") as zip_file:
         zip_file.extractall()
-# 先判断是否已经解压过,如果没有则调用解压函数解压
+
+
+# 校验邮箱格式
 def check_email():
-    if not os.path.exists('./file'):
-        extract_file('./file.zip')
-    # 接收收件人列表
+    # 先判断是否已经解压过,如果没有则调用解压函数解压
+    extract_file('./file.zip')
+
+    # 待发送列表
     received_email_list = []
     try:
         with open('./file/receivers_emails.txt', 'r') as f:
@@ -45,6 +57,8 @@ def check_email():
     except:
         print('读取文件失败,请检查')
         exit()
+
+
 # 发送邮件
 def send_mail(sender, password, receivers_mail_list):
     sender = sender  # 发送的邮件
@@ -52,40 +66,82 @@ def send_mail(sender, password, receivers_mail_list):
     receivers = receivers_mail_list  # 接收邮件可以为列表，可设置为你的QQ邮箱或者其他邮箱
 
     # 创建一个带附件的实例
-    message = MIMEMultipart()
-    message['From'] = Header("测试", 'utf-8')
-    message['To'] = Header("测试", 'utf-8')
+    msg = MIMEMultipart()
+    msg['From'] = Header("测试", 'utf-8')
+    msg['To'] = Header("测试", 'utf-8')
     subject = 'Python SMTP 邮件测试'
-    message['Subject'] = Header(subject, 'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
 
     # 邮件正文内容
-    message.attach(MIMEText('Python邮件……', 'plain', 'utf-8'))
+    msg.attach(MIMEText('Python 邮件发送测试……', 'plain', 'utf-8'))
 
-    # 构造附件，传送file中的 enclosure.txt 文件
+    # 构造附件1，传送file目录下的 enclosure.txt 文件
     txtpart = MIMEApplication(open('./file/enclosure.txt', 'rb').read())
     txtpart.add_header('Content-Disposition', 'attachment', filename=Header("附件.txt", "utf-8").encode())
-    message.attach(txtpart)
+    msg.attach(txtpart)
 
     try:
         smtpObj = smtplib.SMTP_SSL('smtp.qq.com', 465)
         smtpObj.login(sender, sender_pass)
-        smtpObj.sendmail(sender, receivers, message.as_string())
+        smtpObj.sendmail(sender, receivers, msg.as_string())
         print("邮件发送成功!")
     except smtplib.SMTPException:
         print("Error: 无法发送邮件")
 
+
+# 移动压缩包
+def delete_file():
+    try:
+        os.remove('file.zip')
+    except:
+        print("不存在文件")
+
+
+# 删除文件夹
+def delete_file1():
+    try:
+        shutil.rmtree('file')
+    except:
+        print("不存在邮件")
+
+#备份压缩包
+def copy_file():
+    try:
+        shutil.copyfile('./file.zip', './history/%s.zip'%name)
+    except:
+        print("不存在压缩包")
+
+
 if __name__ == '__main__':
     # 接受参数获取可用邮箱列表
     try:
-        if sys.argv[1] == 'list':
+        if sys.argv[1] == '-list':
             try:
                 with open('email.txt', 'r') as f:
-                    print(f.read())
+                    print('可用邮箱列表\n', f.read())
             except:
                 print('email.txt文件打开出错!')
     except:
-        # 获取要发送的邮件列表,和发送邮箱的账号密码
-        receivers_mail_list = check_email()
-        sender, passwd = get_email()
-        # 发送
-        send_mail(sender, passwd, receivers_mail_list)
+        while True:
+            try:
+                # 获取要发送的邮件列表,和发送邮箱的账号密码
+                receivers_mail_list = check_email()
+                sender, passwd = get_email()
+                # 发送
+                send_mail(sender, passwd, receivers_mail_list)
+                # 发送完之后备份压缩包,再删除file压缩包和file文件夹,循环检测是否存在新的压缩包
+
+                # 先判断备份目录是否存在,不存在则创建
+                if not os.path.exists('./history'):
+                    os.makedirs('./history')
+                    print('备份目录不存在,已重新创建')
+                # 移动压缩包进备份目录并使用时间戳重命名
+                name = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
+                copy_file()
+                # 删除file压缩包和file目录
+                delete_file1()
+                delete_file()
+                time.sleep(1)
+                print('已完成删除和备份')
+            except:
+                time.sleep(3)

@@ -1,0 +1,51 @@
+.body {
+    width: 1270px;
+    height: 70px;
+    display: block;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body {
+    background: url(../images/background.jpg) no-repeat fixed;
+    background-size: 100%;
+}
+
+/* .b {
+    width: 1270px;
+    height: 570px;
+    display: block;
+    position: relative;
+    overflow-y: auto;
+} */
+
+/* .b::after {
+    content: "";
+    background: url(../images/background.jpg) no-repeat;
+    background-size: 100%;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+} */
+
+.search {
+    position: relative;
+    left: 800px;
+    top: 20px;
+    font-size: 20px;
+    font-family: '楷体';
+    color: #fff;
+    width: 1000px;
+}
+
+input {
+    background-color: rgba(64, 63, 67, 0.167);
+    color: rgb(255, 254, 254);
+    font-size: 18px;
+    font-family: '楷体';
+}

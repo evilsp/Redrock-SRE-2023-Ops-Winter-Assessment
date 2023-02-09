@@ -1,0 +1,121 @@
+body {
+    font-family: "楷体";
+    font-weight: 500;
+}
+
+.w {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    height: 85px;
+    border-bottom: 2px solid rgb(233, 89, 89);
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: "楷体";
+    position: relative;
+    bottom: -10px;
+    color: rgb(233, 85, 100);
+    text-shadow: 2px 6px rgb(173, 173, 233, 0.3);
+}
+
+.registerarea {
+    height: 400px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+.registerarea h3 {
+    height: 42px;
+    border-bottom: 1px solid #ccc;
+    background-color: #ececec;
+    line-height: 42px;
+    padding: 0 10px;
+    font-size: 18px;
+}
+
+.login {
+    float: right;
+    font-size: 14px;
+}
+
+.login a {
+    color: rgb(208, 23, 23);
+}
+
+.login a:hover {
+    text-decoration: underline;
+}
+
+.reg_form {
+    width: 600px;
+    margin: 10px auto 0;
+}
+
+.reg_form ul li label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    font-size: 20px;
+}
+
+.reg_form ul li input {
+    width: 242px;
+    height: 37px;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    font-family: "楷体";
+    outline: none;
+    padding: 0 10px 0 10px;
+}
+
+.reg_form ul li {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sub {
+    position: relative;
+    left: 50px;
+    top: 20px;
+}
+
+.footer {
+    font-size: 16px;
+    text-align: center;
+}
+
+.file {
+    float: left;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: -29px;
+    outline: none;
+    background-color: rgba(230, 225, 225, 0.5);
+}
+
+.fujian {
+    width: 100px;
+    height: 18px;
+    display: inline-block;
+    color: rgb(6, 6, 6);
+    font-size: large;
+}
+
+textarea {
+    width: 400px;
+    height: 80px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: "楷体";
+    color: rgb(47, 46, 46);
+    outline: none;
+    padding: 0 10px 0 10px;
+    resize: none;
+}

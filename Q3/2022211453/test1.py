@@ -21,12 +21,14 @@ def get_email():
                 txt = email.replace('\n', '')
                 sendemail = txt.split()[0]
                 password = txt.split()[1]
-                if sendemail not in senmail_list:
+                sender_list = senmail_list.readlines()
+                if sendemail not in sender_list:
                     print('没有登记该邮箱')
+                    exit()
                 else:
                     return sendemail, password
     except:
-        print('请检查sender_emails.txt文件是否存在!')
+        print('请检查文件是否存在或邮箱是否登记')
 
 
 # 解压文件

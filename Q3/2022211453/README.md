@@ -14,7 +14,6 @@
 
 ![img](https://raw.githubusercontent.com/lanziking01/555/main/img/image-20230131024307648.png)
 
-<<<<<<< HEAD
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/d3f032b0cfdb5fc1be14e42249b8f56.jpg)
 
 2.发送邮件时，读取发件箱后会和可用邮箱列表进行匹配，没有则提示报错，有则发送。
@@ -26,11 +25,8 @@
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/89268a860ccc0143a4edf7394bce962.png)
 
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/b52d64ff8b6d2125ef02544bb704419.png)
-=======
-![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/dc7b945c990ac6e52e8c653efaf56d0.png)
->>>>>>> f26ad8e3363783e9317c7815faf08a2a749268a8
 
-2.若receivers_emails.txt里的收件人邮箱格式不对，报错。
+4.若receivers_emails.txt里的收件人邮箱格式不对，报错。
 
 ![](https://raw.githubusercontent.com/lanziking01/555/main/img/34d892a9bd5f87e73e8553d475b9693.png)
 
@@ -38,21 +34,21 @@
 
 ![](https://raw.githubusercontent.com/lanziking01/555/main/img/8ad0102b3807c00bc53164e4a4596cb.png)
 
-3.发件人不存在 会报错。
+5.发件人不存在 会报错。
 
 ![](https://raw.githubusercontent.com/lanziking01/555/main/img/38c71e15544b1bbeac5d2ad98a62f08.png)
 
 ![](https://raw.githubusercontent.com/lanziking01/555/main/img/189a561795431c5fcad8b9934bc04b3.png)
 
-4.将自己的可用邮箱放在文档email.txt中，输入命令python text1.py list查看(再上传email.txt会覆盖原来的文件，达到增删目的)
+6.将自己的可用邮箱放在文档email.txt中，输入命令python text1.py list查看(再上传email.txt会覆盖原来的文件，达到增删目的)
 
 ![](https://raw.githubusercontent.com/lanziking01/555/main/img/3f8db5bdeb51f9a270539c0fb411336.png)
 
-5.启动后台运行，实行自动监测
+7.启动后台运行，实行自动监测
 
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/fe113d2001ca142ee6a1a8680473680.png)
 
-5.docker部署到自己服务器，运行容器自动发送邮件，此时file文件已被删除并备份到自动创建的history文件夹中
+8.docker部署到自己服务器，运行容器自动发送邮件，此时file文件已被删除并备份到自动创建的history文件夹中
 
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/2bb59ba5c1c754fc6bc70989bea3084.png)
 

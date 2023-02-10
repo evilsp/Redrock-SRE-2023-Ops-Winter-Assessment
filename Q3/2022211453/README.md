@@ -14,6 +14,7 @@
 
 ![img](https://raw.githubusercontent.com/lanziking01/555/main/img/image-20230131024307648.png)
 
+<<<<<<< HEAD
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/d3f032b0cfdb5fc1be14e42249b8f56.jpg)
 
 2.发送邮件时，读取发件箱后会和可用邮箱列表进行匹配，没有则提示报错，有则发送。
@@ -25,6 +26,9 @@
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/89268a860ccc0143a4edf7394bce962.png)
 
 ![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/b52d64ff8b6d2125ef02544bb704419.png)
+=======
+![](https://raw.githubusercontent.com/lanziking01/tuchuang/main/img/dc7b945c990ac6e52e8c653efaf56d0.png)
+>>>>>>> f26ad8e3363783e9317c7815faf08a2a749268a8
 
 2.若receivers_emails.txt里的收件人邮箱格式不对，报错。
 

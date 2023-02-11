@@ -31,7 +31,7 @@ async def mc_backuphp():
 async def mc_backup(args: Message = CommandArg()):
     arg = args.extract_plain_text()
     try:
-        with MCRcon('127.0.0.1', 'DEAR19787420041011', 25575) as mcr:
+        with MCRcon('127.0.0.1', 'password', 25575) as mcr:
             await backup.send("开始广播：服务器开始大型备份，请在1分钟内退出服务器")
             mcr.command("/say 服务器开始大型备份，请在1分钟内退出服务器")
             sleep(60)
@@ -51,15 +51,6 @@ async def mc_backup(args: Message = CommandArg()):
     time = time.strftime("%Y-%m-%d-%X-", time.localtime()).replace(':', '.')
     target_path = os.path.abspath(r'D:\HMCL_MC_sre\mc_backup\%s' % (str(time) + ps))
     target_path0 = os.path.abspath(r'D:\HMCL_MC_sre\mc_backup')
-    # print(time)
-    # if not os.path.exists(target_path):
-    #     # 如果目标路径不存在原文件夹的话就创建
-    #     os.makedirs(target_path)
-    #
-    # if os.path.exists(source_path):
-    #     # 如果目标路径存在原文件夹的话就先删除
-    #     shutil.rmtree(target_path)
-    # 复制文件夹
     shutil.copytree(source_path, target_path)
     await backup.send("备份已完成！")
     sleep(1)

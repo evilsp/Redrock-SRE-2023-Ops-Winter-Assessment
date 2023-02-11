@@ -23,7 +23,7 @@ command = on_command(cmd='autosave', priority=2, block=True)
 @scheduler.scheduled_job("cron", minute="*/10")
 async def mc_autosave():
     try:
-        with MCRcon('127.0.0.1', 'DEAR19787420041011', 25575) as mcr:
+        with MCRcon('127.0.0.1', 'password', 25575) as mcr:
             mcr.command("/say 开始自动备份")
             mcr.command("/save-off")
             sleep(1)

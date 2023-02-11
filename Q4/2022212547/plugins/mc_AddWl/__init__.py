@@ -13,18 +13,6 @@ config = Config.parse_obj(global_config)
 
 # mc_whitelist_add:v2
 
-from mcrcon import MCRcon
-from time import sleep
-import pymysql
-from nonebot.adapters.onebot.v11.event import PrivateMessageEvent
-from nonebot.adapters.onebot.v11.message import Message
-from nonebot.params import CommandArg
-from nonebot import on_command
-
-# from nonebot.adapters.onebot.v11 import Message, PrivateMessageEvent
-# from nonebot.matcher import Matcher
-# from nonebot.adapters import Message
-# from nonebot.params import Arg, CommandArg, ArgPlain
 
 add = on_command(cmd='addwl', priority=2, block=True)
 
@@ -42,7 +30,7 @@ async def mc_addwl(event: PrivateMessageEvent, args: Message = CommandArg()):
             host="127.0.0.1",  # 数据库ip地址
             port=3306,  # 数据库端口
             user="root",  # 用户名
-            passwd="DEAR197874",  # 密码
+            passwd="password",  # 密码
             db="MC_wl"  # 连接的数据库
         )
         # 使用 cursor() 方法创建一个游标对象 cursor(光标
@@ -90,4 +78,3 @@ async def mc_addwl(event: PrivateMessageEvent, args: Message = CommandArg()):
         conn.close()
     except pymysql.err.OperationalError:
         await add.send("未启动mysql容器！")
-

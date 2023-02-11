@@ -17,7 +17,7 @@ command = on_command(cmd='c', priority=2, block=True)
 async def mc_command(args: Message = CommandArg()):
     arg = args.extract_plain_text()
     try:
-        with MCRcon('127.0.0.1', 'DEAR19787420041011', 25575) as mcr:
+        with MCRcon('127.0.0.1', 'password', 25575) as mcr:
             resp = mcr.command("/%s" % arg)
             await command.send(resp)
     except ConnectionRefusedError:

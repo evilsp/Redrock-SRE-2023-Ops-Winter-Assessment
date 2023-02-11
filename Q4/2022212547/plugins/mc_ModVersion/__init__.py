@@ -233,7 +233,7 @@ async def modv_detect_(args: Message = CommandArg()):
             "对服务器mod的更新检查服务已开始运行,检测到新的mod或者插件上传后将会自动进行日志与版本的备份，请务必保证服务器在关闭状态下运行该服务！")
     elif arg == 'mcstop':
         try:
-            with MCRcon('127.0.0.1', 'DEAR19787420041011', 25575) as mcr:
+            with MCRcon('127.0.0.1', 'password', 25575) as mcr:
                 mcr.command("/say 服务器将开始大型更新，请在1分钟内退出服务器哦")
                 await modv_detect.send("已对服务器进行广播：服务器将开始大型更新，请在1分钟内退出服务器哦")
                 sleep(60)

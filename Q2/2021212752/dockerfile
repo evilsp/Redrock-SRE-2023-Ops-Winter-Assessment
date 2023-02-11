@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+COPY . /myq2
+RUN apt update \
+    && apt-get install -y inotify-tools \
+    && apt-get install -y s-nail \
+    && apt-get install -y bsd-mailx \
+    && apt-get install -y gedit \
+    && apt-get install -y vim \
+    && chmod -R 777 /myq2 \
+    && cat /myq2/readme.md \
+    && rm /etc/s-nail.rc \
+    && mv -f /myq2/s-nail.rc /etc/ 
+
+CMD ["/bin/bash","myq2/run.sh"]

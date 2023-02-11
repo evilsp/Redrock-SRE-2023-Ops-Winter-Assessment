@@ -6,7 +6,7 @@ services:
     ports: 
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=DEAR197874
+      - MYSQL_ROOT_PASSWORD=password
   mymcnginx_v3:
     restart: "no"
     image: mohamnag/nginx-file-browser

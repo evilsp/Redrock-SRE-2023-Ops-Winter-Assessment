@@ -66,12 +66,12 @@ monitor_process() {
 
   while true; do
     if [ -z "$(pidof "$process_name")" ]; then
-      echo "$process_name δ����" | send_email   "$Do_What"  &
-      echo "$process_name δ����" | send_notification &
+      echo "$process_name 未运行" | send_email   "$Do_What"  &
+      echo "$process_name 未运行" | send_notification &
       #break
     else
-      echo "$process_name ������" | send_email   "$Do_What"  &
-      echo "$process_name ������" | send_notification &
+      echo "$process_name 运行中" | send_email   "$Do_What"  &
+      echo "$process_name 运行中" | send_notification &
     fi
 
     #time 

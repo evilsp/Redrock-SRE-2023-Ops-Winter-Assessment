@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ¼àÊÓÄ¿Â¼¸ü¸Ä
+# ç›‘è§†ç›®å½•æ›´æ”¹
 monitor_dir() {
   dir_path=$1
   #set_time=$2
@@ -34,24 +34,24 @@ monitor_dir() {
   done
 }
 
-# ¼à¿ØCPUÄÚ´æÊ¹ÓÃÇé¿ö
+# ç›‘æ§CPUå†…å­˜ä½¿ç”¨æƒ…å†µ
 monitor_system() {
   fortime=$1
   threshold_mem=70
   #threshold_mem1 ="inotifywait:123"
 
 while true; do
-  # »ñÈ¡µ±Ç°ÄÚ´æÊ¹ÓÃÇé¿ö 
+  # è·å–å½“å‰å†…å­˜ä½¿ç”¨æƒ…å†µ  
   #mem_usage=$(free | awk '/Mem/ {printf "%d\n", $3/$2 * 100.0}')
 
   mem_usage=$(free -m | awk 'NR==2{printf "%s\n", $3*100/$2 }')
-  # ¼ì²éÄÚ´æÊ¹ÓÃÂÊÊÇ·ñ¸ßÓÚãĞÖµ
+  # æ£€æŸ¥å†…å­˜ä½¿ç”¨ç‡æ˜¯å¦é«˜äºé˜ˆå€¼
   if [ "$(echo "$mem_usage >= $threshold_mem" | bc)" -eq 1 ]; then
-    echo "¼ì²âµ½ÄÚ´æÊ¹ÓÃÂÊ½Ï¸ß: $mem_usage%" | send_email   "monitor_system" &
-    echo "¼ì²âµ½ÄÚ´æÊ¹ÓÃÂÊ½Ï¸ß: $mem_usage%" | send_notification &
+    echo "æ£€æµ‹åˆ°å†…å­˜ä½¿ç”¨ç‡è¾ƒé«˜: $mem_usage%" | send_email   "monitor_system" &
+    echo "æ£€æµ‹åˆ°å†…å­˜ä½¿ç”¨ç‡è¾ƒé«˜: $mem_usage%" | send_notification &
   else
-    echo "µ±Ç°ÄÚ´æÊ¹ÓÃ : $mem_usage%"  | send_email   "monitor_system" &
-    echo "ÄÚ´æÄÚ´æÊ¹ÓÃ : $mem_usage%"  | send_notification &
+    echo "å½“å‰å†…å­˜ä½¿ç”¨ : $mem_usage%"  | send_email   "monitor_system" &
+    echo "å½“å‰å†…å­˜ä½¿ç”¨ : $mem_usage%"  | send_notification &
   fi
 
   sleep $fortime
@@ -59,19 +59,19 @@ while true; do
 done
 }
 
-# ¼à¿Ø¹ı³Ì×´Ì¬
+# ç›‘æ§è¿‡ç¨‹çŠ¶æ€
 monitor_process() {
   process_name=$1
   Do_What="monitor_process"
 
   while true; do
     if [ -z "$(pidof "$process_name")" ]; then
-      echo "$process_name Î´ÔËĞĞ" | send_email   "$Do_What"  &
-      echo "$process_name Î´ÔËĞĞ" | send_notification &
+      echo "$process_name Î´ï¿½ï¿½ï¿½ï¿½" | send_email   "$Do_What"  &
+      echo "$process_name Î´ï¿½ï¿½ï¿½ï¿½" | send_notification &
       #break
     else
-      echo "$process_name ÔËĞĞÖĞ" | send_email   "$Do_What"  &
-      echo "$process_name ÔËĞĞÖĞ" | send_notification &
+      echo "$process_name ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" | send_email   "$Do_What"  &
+      echo "$process_name ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" | send_notification &
     fi
 
     #time 
@@ -79,7 +79,7 @@ monitor_process() {
   done
 }
 
-# ¼à¿ØÈí¼ş°æ±¾
+# ç›‘æ§è½¯ä»¶ç‰ˆæœ¬
 monitor_version() {
   process_name=$1
   Do_What="monitor_version"
@@ -92,26 +92,26 @@ monitor_version() {
     echo "server_version = $server_version"
 0
     if [ "$local_version" != "$server_version" ]; then
-      echo "${process_name} °æ±¾ÒÑ¹ıÊ±£¬µ±Ç°°æ±¾Îª ${local_version}, ×îĞÂ°æ±¾Îª ${server_version}." | send_email   "$Do_What"  &
-      echo "${process_name} °æ±¾ÒÑ¹ıÊ±£¬µ±Ç°°æ±¾Îª ${local_version}, ×îĞÂ°æ±¾Îª ${server_version}." | send_notification &
+      echo "${process_name} ç‰ˆæœ¬å·²è¿‡æ—¶ï¼Œå½“å‰ç‰ˆæœ¬ä¸º ${local_version}, æœ€æ–°ç‰ˆæœ¬ä¸º ${server_version}." | send_email   "$Do_What"  &
+      echo "${process_name} ç‰ˆæœ¬å·²è¿‡æ—¶ï¼Œå½“å‰ç‰ˆæœ¬ä¸º ${local_version}, æœ€æ–°ç‰ˆæœ¬ä¸º ${server_version}." | send_notification &
 
     else
-      echo "${process_name} °æ±¾ÊÇ×îĞÂµÄ£¬µ±Ç°°æ±¾ÊÇ ${local_version}." | send_email   "$Do_What"  &
-      echo "${process_name} °æ±¾ÊÇ×îĞÂµÄ£¬µ±Ç°°æ±¾ÊÇ ${local_version}." | send_notification &
+      echo "${process_name} ç‰ˆæœ¬æ˜¯æœ€æ–°çš„ï¼Œå½“å‰ç‰ˆæœ¬æ˜¯ ${local_version}." | send_email   "$Do_What"  &
+      echo "${process_name} ç‰ˆæœ¬æ˜¯æœ€æ–°çš„ï¼Œå½“å‰ç‰ˆæœ¬æ˜¯ ${local_version}." | send_notification &
 
     fi
     sleep 3600
   done
 }
 
-# ·¢ËÍÓÊ¼şÍ¨Öª
+# å‘é€é‚®ä»¶é€šçŸ¥
 send_email() {
   #recipient_email=$1
   recipient_email="1843259704@qq.com"
   email_content=$1
   message=$(cat)
   if [ -n "$recipient_email" ] && [ -n "$message" ]; then
-    echo "$email_content:$message"  | s-nail -s "À´×ÔÄ³Ì¨ĞéÄâ»ú..." $recipient_email
+    echo "$email_content:$message"  | s-nail -s "æ¥è‡ªæŸå°è™šæ‹Ÿæœº..." $recipient_email
   fi
 }
 
@@ -119,13 +119,13 @@ send_notification() {
   #message=$1
   message=$(cat)
   notify-send "$message"
-  # ·¢ËÍÓÊ¼ş
+  # å‘é€é‚®ä»¶
   echo "$message"  
 }
 
 usage() {
-    echo "Usage(ÓÃ·¨¹¦ÄÜ):"
-    echo "args(²ÎÊı)": ["-m" ,"dirpath" ,"-t" ,"time" ,"-p" ,"processname" ,"-v " ,"processname"]
+    echo "Usage(ç”¨æ³•åŠŸèƒ½):"
+    echo "args(å‚æ•°)": ["-m" ,"dirpath" ,"-t" ,"time" ,"-p" ,"processname" ,"-v " ,"processname"]
     exit -1
 }
  
@@ -152,28 +152,28 @@ done
 
 
 
-#sh detection.sh -m /root/linuxstudy/Q2    -t 10     -p firefox  -v firefox  -c 1843259704@qq.com 
+#sh detection.sh -m /root//myq2    -t 10     -p firefox  -v firefox  -c 1843259704@qq.com 
 
-#1.Í¨¹ıÃüÁîĞĞ²ÎÊıÖ¸¶¨¼ì²âÄ³¸öÄ¿Â¼£¬µ±Ä¿Â¼ÎÄ¼ş·¢Éú¸Ä¶¯Ê±£¬Êä³ö±ä¶¯ĞÅ??
+#1.é€šè¿‡å‘½ä»¤è¡Œå‚æ•°æŒ‡å®šæ£€æµ‹æŸä¸ªç›®å½•ï¼Œå½“ç›®å½•æ–‡ä»¶å‘ç”Ÿæ”¹åŠ¨æ—¶ï¼Œè¾“å‡ºå˜åŠ¨ä¿¡æ¯
 #sh detection.sh -m /root/linuxstudy/Q2 -c 1843259704@qq.com
 if [ -n "$dir_path" ] ; then
 monitor_dir "$dir_path" &
 fi
 
-#2.¶¨Ê±¼ì²âkaliÏµÍ³µÄCPUÎÂ¶È£¬ÄÚ´æÊ¹ÓÃÇé¿ö£¬´ïµ½ãĞÖµ£¬Êä³öÌáÊ¾ĞÅÏ¢
+#2.å®šæ—¶æ£€æµ‹kaliç³»ç»Ÿçš„CPUæ¸©åº¦ï¼Œå†…å­˜ä½¿ç”¨æƒ…å†µï¼Œè¾¾åˆ°é˜ˆå€¼ï¼Œè¾“å‡ºæç¤ºä¿¡æ¯
 #sh detection.sh -t 10   (s)
 if [ -n "$monitor_system_time" ]; then
 echo $monitor_system_time
 monitor_system "$monitor_system_time"  &   
 fi
 
-#3.Í¨¹ıÃüÁîĞĞ²ÎÊı¼à²âÄ³¸ö³ÌĞò½ø³Ì£¬ÒâÍâ½áÊøÊ±£¬·¢³ö¾¯¸æÌáĞÑ
+#3.é€šè¿‡å‘½ä»¤è¡Œå‚æ•°ç›‘æµ‹æŸä¸ªç¨‹åºè¿›ç¨‹ï¼Œæ„å¤–ç»“æŸæ—¶ï¼Œå‘å‡ºè­¦å‘Šæé†’
 #sh detection.sh -p firefox
 if [ -n "$process_name" ]; then
 monitor_process "$process_name"  &   
 fi
 
-#4.¶ÔÖ¸¶¨µÄÈí¼ş½øĞĞ°æ±¾¼à¿Ø£¬µ±±¾µØ°æ±¾ĞÅÏ¢Óë·şÎñ¶ËµÄ°æ±¾ĞÅÏ¢²»Æ¥ÅäÊ±£¬Êä³öµ±Ç°°æ±¾ºÍ¿É¸üĞÂ°æ±¾
+# 4.å¯¹æŒ‡å®šçš„è½¯ä»¶è¿›è¡Œç‰ˆæœ¬ç›‘æ§ï¼Œå½“æœ¬åœ°ç‰ˆæœ¬ä¿¡æ¯ä¸æœåŠ¡ç«¯çš„ç‰ˆæœ¬ä¿¡æ¯ä¸åŒ¹é…æ—¶ï¼Œè¾“å‡ºå½“å‰ç‰ˆæœ¬å’Œå¯æ›´æ–°ç‰ˆæœ¬
 #sh detection.sh -v firefox
 if [ -n "$version_process_name" ]; then
 monitor_version "$version_process_name" &  

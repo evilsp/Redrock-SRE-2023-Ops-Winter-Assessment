@@ -242,5 +242,5 @@ retain date sender from to cc subject message-id mail-followup-to reply-to
 set from="1843259704@qq.com"    
 set smtp="smtp.qq.com"
 set smtp-auth-user="1843259704@qq.com"
-set smtp-auth-password="btnrpyzcokggegee"  
+set smtp-auth-password="xxx"  
 set smtp-auth=login

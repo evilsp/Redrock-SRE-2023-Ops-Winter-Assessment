@@ -17,7 +17,7 @@ while True:
     elif recv_data == '1':
         conn_socket.send('请选择主机的连接方式：(1.为密码连接 其余均为为密钥连接)'.encode('gbk'))
         choose = conn_socket.recv(1024).decode('gbk')
-        conn_socket.send('请输入你的主机号：'.encode('gbk'))
+        conn_socket.send('请输入你的主机IP地址：'.encode('gbk'))
         hostname = conn_socket.recv(1024).decode('gbk')
         conn_socket.send('你可以给你的主机标序号或取个别名：'.encode('gbk'))
         num = conn_socket.recv(1024).decode('gbk')
@@ -40,7 +40,7 @@ while True:
             conn_socket.send(f'{x}'.encode('gbk'))
     elif recv_data == '2':
         x = view_datd(username)
-        conn_socket.send(f'一共有{x[0]}个主机\n{x[1]}\n请选择要删除的主机的主机号：'.encode('gbk'))
+        conn_socket.send(f'一共有{x[0]}个主机\n{x[1]}\n请选择要删除的主机的序号或别名：'.encode('gbk'))
         del_choose = conn_socket.recv(1024).decode('gbk')
         x = del_data(username, del_choose)
         conn_socket.send(f'{x}'.encode('gbk'))
@@ -81,12 +81,12 @@ while True:
                 pass
     elif recv_data == '4':
         x = view_datd(username)
-        conn_socket.send(f'一共有{x[0]}个主机\n{x[1]}\n请输入要查看的主机的序号：'.encode('gbk'))
+        conn_socket.send(f'一共有{x[0]}个主机\n{x[1]}\n请输入要查看的主机的序号或别名：'.encode('gbk'))
         view_num = conn_socket.recv(1024).decode('gbk')
         x = view_configuration(username, view_num)
         conn_socket.send(f'{x}'.encode('gbk'))
     elif recv_data == '5':
-        conn_socket.send('请输入要修改的主机的序号：'.encode('gbk'))
+        conn_socket.send('请输入要修改的主机的序号或别名：'.encode('gbk'))
         change_num = conn_socket.recv(1024).decode('gbk')
         x = view_configuration(username, change_num)
         conn_socket.send(f'{x}'.encode('gbk'))

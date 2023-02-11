@@ -17,7 +17,7 @@ def add_user(username):
         return '添加成功！'
     except Exception as e:
         db.rollback()
-        return '注册成功！'
+        return '登入成功！'
     finally:
         db.close()
 
@@ -101,9 +101,11 @@ def del_data(username, num):
     db = pymysql.connect(host="47.109.56.167", user="root", password="zzlniu", db="ssh_link", port=3306,
                          charset='utf8')
     cursor = db.cursor()
-    sql = f"delete from {username} where num = {num}"
+    sql = f"delete from {username} where num = '{num}';"
+    sql1 = f"delete from {username}_configuration where num = '{num}';"
     try:
         cursor.execute(sql)
+        cursor.execute(sql1)
         db.commit()
         return '删除成功'
     except Exception as e:
@@ -120,11 +122,11 @@ def view_configuration(username, i):
 
     cursor = db.cursor()
 
-    sql = f'select id,peizhi from {username}_configuration where num={i};'
+    sql = f'select id,peizhi from {username}_configuration where num="{i}";'
     try:
         cursor.execute(sql)
         result = cursor.fetchall()
-        num = len(result)
+        num = int(len(result))
         if num == 0:
             return '此主机还没有配置'
         else:
@@ -159,7 +161,7 @@ def del_configuration(username, num):
 
     cursor = db.cursor()
 
-    sql = f'delete from {username}_configuration where id={num};'
+    sql = f'delete from {username}_configuration where id="{num}";'
     try:
         cursor.execute(sql)
         db.commit()
@@ -177,7 +179,7 @@ def add_configuration(username, add_peizhi, num):
 
     cursor = db.cursor()
     db.commit()
-    sql = f'insert into {username}_configuration values(null,\'{add_peizhi}\',{num});'
+    sql = f'insert into {username}_configuration values(null,\'{add_peizhi}\',"{num}");'
     try:
         cursor.execute(sql)
         db.commit()
@@ -213,7 +215,7 @@ def get_configuration(username, i):
 
     cursor = db.cursor()
 
-    sql = f'select peizhi from {username}_configuration where num={i};'
+    sql = f'select peizhi from {username}_configuration where num="{i}";'
     try:
         cursor.execute(sql)
         result = cursor.fetchall()

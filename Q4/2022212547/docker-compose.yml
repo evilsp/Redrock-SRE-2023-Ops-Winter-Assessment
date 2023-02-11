@@ -1,0 +1,17 @@
+version: "3"
+services:
+  mysqlv1:
+    restart: "no"
+    image: mysql:latest    
+    ports: 
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=DEAR197874
+  mymcnginx_v3:
+    restart: "no"
+    image: mohamnag/nginx-file-browser
+    ports:
+      - "8080:80"
+    volumes:
+      - //d/HMCL_MC_sre/mc_nginx/download:/opt/www/files/
+
